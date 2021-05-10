@@ -1,0 +1,31 @@
+spring:
+  redis:
+    host: <serverName>
+    port: 3333
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:file:~/h2db-data/devracoondb;MODE=MySQL
+      driver-class-name: org.h2.Driver
+      username: localadmin
+      password: localadmin
+  jpa:
+    database-platform: H2
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    org:
+      hibernate: debug
+      type:
+        descriptor:
+          sql: trace
+    root: info
