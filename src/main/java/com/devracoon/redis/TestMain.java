@@ -7,6 +7,7 @@ public class TestMain {
         String aaa = "aaaa";
         switch (aaa){
             case "aaaa":
+
             case "bbbb":
             case "cccc":
                 System.out.println("aaaaaaaaaaa");
