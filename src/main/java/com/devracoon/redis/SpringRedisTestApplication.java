@@ -16,7 +16,6 @@ public class SpringRedisTestApplication {
             case "cccc":
                 System.out.println("aaaaaaaaaaa");
         }
-
         SpringApplication.run(SpringRedisTestApplication.class, args);
     }
 
