@@ -12,6 +12,8 @@ public class TestMain {
                 System.out.println("aaaaaaaaaaa");
         }
 
+
+
         SpringApplication.run(SpringRedisTestApplication.class, args);
     }
 }
