@@ -23,6 +23,7 @@ public class RedisCacheUtils<K, V> {
 	public void set(K key, V value, String listName) {
 		// 리스트에 저장
 		// find all
+
 		List<String> keys = redisTemplate.opsForList().range(listName, 0, -1);
 		log.info("keys : {0}" , keys);
 		if (! keys.contains(key) ) {
