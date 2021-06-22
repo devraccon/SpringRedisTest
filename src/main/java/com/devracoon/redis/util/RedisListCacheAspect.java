@@ -33,10 +33,5 @@ public class RedisListCacheAspect {
         }
         return result;
 
-
-
-
-
-        return value;
     }
 }
