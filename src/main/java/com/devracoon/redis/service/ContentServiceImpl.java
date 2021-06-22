@@ -27,14 +27,25 @@ public class ContentServiceImpl {
     }
 
     @Transactional
+    @CacheEvict(value = "content")
     public void removeContent(String contentId) throws Exception{
         repo.deleteById(contentId);
     }
 
-    @Cacheable(value = "content")
+    @Cacheable(value = "contentlist")
     public List<ContentDTO> findContent(String contentName) throws Exception{
         List<ContentDTO> contentDTOs = new ArrayList<ContentDTO>();
         List<Content> contents = repo.findByContentName(contentName);
+        for(Content content : contents){
+            contentDTOs.add(ContentDTO.createDTO(content));
+        }
+        return contentDTOs;
+    }
+
+    @Cacheable(value = "content")
+    public List<ContentDTO> findAll() throws Exception{
+        List<ContentDTO> contentDTOs = new ArrayList<ContentDTO>();
+        List<Content> contents = repo.findAll();
         for(Content content : contents){
             contentDTOs.add(ContentDTO.createDTO(content));
         }

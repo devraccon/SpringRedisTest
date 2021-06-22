@@ -8,12 +8,17 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @RedisHash("contentDTO")
-public class ContentDTO {
+public class ContentDTO implements Serializable {
+
+    private static final long serialVersionUID = 3077465140312258030L;
+
     @Id
     String contentId;
     String contentName;

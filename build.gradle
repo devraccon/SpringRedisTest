@@ -28,7 +28,7 @@ dependencies {
     implementation group: 'it.ozimov', name: 'embedded-redis', version: '0.7.1'
 
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'com.h2database:h2'
+    compileOnly 'com.h2database:h2'
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'

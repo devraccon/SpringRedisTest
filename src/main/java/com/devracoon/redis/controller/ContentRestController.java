@@ -40,15 +40,22 @@ public class ContentRestController {
 
     @GetMapping("/content/findContent")
     public List<ContentDTO> findContent(HttpServletRequest request , HttpServletResponse response ,ContentDTO dto) throws Exception{
-        List<ContentDTO> contents = contentService.findContent(dto.getContentName());
-        String key = "content";
-        String value = "iamvalue";
+        List<ContentDTO> contents1 = contentService.findContent(dto.getContentName());
 
-        final ValueOperations<String, String> stringStringListOperations = redisTemplate.opsForValue();
-        log.info("aaaa " + stringStringListOperations.("content"));
+        log.info("111111");
 
+        List<ContentDTO> contents2 = contentService.findContent(dto.getContentName());
 
-        return contents;
+        log.info("2222222");
+
+        return contents1;
+    }
+
+    @GetMapping("/content/findAll")
+    public List<ContentDTO> findContent(HttpServletRequest request , HttpServletResponse response) throws Exception{
+        List<ContentDTO> contents1 = contentService.findAll();
+
+        return contents1;
     }
 
 }
