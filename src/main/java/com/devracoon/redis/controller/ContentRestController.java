@@ -33,20 +33,16 @@ public class ContentRestController {
 
     @PostMapping("/content/removeContent")
     public String removeContent(HttpServletRequest request , HttpServletResponse response ,ContentDTO dto) throws Exception{
-        contentService.removeContent(dto.getContentId());
+        contentService.removeContent(dto);
         return "OK";
     }
 
 
     @GetMapping("/content/findContent")
     public List<ContentDTO> findContent(HttpServletRequest request , HttpServletResponse response ,ContentDTO dto) throws Exception{
-        List<ContentDTO> contents1 = contentService.findContent(dto.getContentName());
+        List<ContentDTO> contents1 = contentService.findContent(dto);
 
-        log.info("111111");
-
-        List<ContentDTO> contents2 = contentService.findContent(dto.getContentName());
-
-        log.info("2222222");
+        List<ContentDTO> contents2 = contentService.findContent(dto);
 
         return contents1;
     }

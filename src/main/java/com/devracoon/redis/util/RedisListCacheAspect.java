@@ -29,7 +29,6 @@ public class RedisListCacheAspect {
         Object result = redisCacheUtils.get(key);
         if(ObjectUtils.isEmpty(result)){
             result = joinPoint.proceed();
-
         }
         return result;
 
