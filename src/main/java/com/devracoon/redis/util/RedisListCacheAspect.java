@@ -12,7 +12,7 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
-
+@Component
 @RequiredArgsConstructor
 @Aspect
 @Slf4j
@@ -24,13 +24,31 @@ public class RedisListCacheAspect {
     public Object listCacheable(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         RedisListCacheable redisListCacheable = AnnotationUtils.getAnnotation(methodSignature.getMethod() , RedisListCacheable.class);
-        log.info("join point args : {0}" , joinPoint.getArgs() );
-        String key = redisListCacheable.value() + Joiner.on(":").join(joinPoint.getArgs());
+
+        String key = redisListCacheable.value();
+        Object [] args = joinPoint.getArgs();
+        if(args.length > 0 ){
+            key = key + Joiner.on(":").join(joinPoint.getArgs());
+        }else{
+            key = key + "noArgs[]";
+        }
+
+        log.info("key {}   , join point args : {}" , key , joinPoint.getArgs() );
         Object result = redisCacheUtils.get(key);
         if(ObjectUtils.isEmpty(result)){
             result = joinPoint.proceed();
+            redisCacheUtils.set(key, result, redisListCacheable.value());
         }
         return result;
+    }
+
+    @Around("@annotation(RedisListCacheEvict)")
+    public Object listCacheEvict(ProceedingJoinPoint joinPoint) throws Throwable {
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        RedisListCacheEvict redisListCacheEvict = AnnotationUtils.getAnnotation(methodSignature.getMethod() , RedisListCacheEvict.class);
+        log.info("RedisListCacheEvict value : {}" , redisListCacheEvict.value() );
+        redisCacheUtils.evict(redisListCacheEvict.value());
+        return joinPoint.proceed();
 
     }
 }

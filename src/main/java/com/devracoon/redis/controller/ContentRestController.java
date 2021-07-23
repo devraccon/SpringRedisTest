@@ -39,12 +39,12 @@ public class ContentRestController {
 
 
     @GetMapping("/content/findContent")
-    public List<ContentDTO> findContent(HttpServletRequest request , HttpServletResponse response ,ContentDTO dto) throws Exception{
-        List<ContentDTO> contents1 = contentService.findContent(dto);
+    public ContentDTO findContent(HttpServletRequest request , HttpServletResponse response ,ContentDTO dto) throws Exception{
+        ContentDTO content1 = contentService.findContent(dto);
 
-        List<ContentDTO> contents2 = contentService.findContent(dto);
+        ContentDTO content2 = contentService.findContent(dto);
 
-        return contents1;
+        return content1;
     }
 
     @GetMapping("/content/findAll")
