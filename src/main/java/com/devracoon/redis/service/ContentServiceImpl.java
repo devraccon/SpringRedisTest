@@ -32,9 +32,9 @@ public class ContentServiceImpl {
         return ContentDTO.createDTO(repo.save(content));
     }
 
-//    @Transactional
-//    @CacheEvict(value = "content" , key="{#p0.contentId}")
+    @Transactional
     @RedisListCacheEvict(value="CONTENTLIST")
+    @CacheEvict(value = "content" , key="{#p0.contentId}")
     public void removeContent(ContentDTO dto) throws Exception{
         repo.deleteById(dto.getContentId());
     }
